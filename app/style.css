@@ -1,0 +1,73 @@
+html {
+	box-sizing: border-box;
+}
+
+*, *.before, *.after {
+	box-sizing: inherit;
+}
+
+html, body {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	position: absolute;
+}
+
+body, input {
+	font: menu;
+}
+
+textarea, input, div {
+	outline: none;
+	margin: 0;
+}
+
+.controls {
+	background-color: rgb(217, 241, 238);
+	padding: 10px 10px 10px 10px;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	min-width: 100vw;
+	position: relative;
+}
+
+.content {
+	height: 100vh;
+	display: flex;
+}
+
+.raw-markdown {
+	min-height: 100%;
+	min-width: 100%;
+	flex-grow: 1;
+	padding: 1em;
+	overflow: scroll;
+	font-size: 16px;
+
+	border: 5px solid rgb(238, 252, 250);
+	background-color: rgb(238, 252, 250);
+	font-family: monospace;
+}
+
+.raw-markdown.drag-over {
+	background-color: rgb(181, 220, 216);
+	border-color: rgb(75, 160, 151);
+}
+
+.raw-markdown.drag-error {
+	background-color: rgba(170, 57, 57, 1);
+	border-color: rgba(255, 170, 170, 1);
+}
+
+
+
+

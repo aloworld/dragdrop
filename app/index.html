@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta
+		http-equiv="Content-Security-Policy"
+		content="default-src 'self'; script-src 'self'" />
+	<meta 
+		http-equiv="X-Content-Security-Policy"
+		content="default-src 'self'; script-src 'self'" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="style.css" type="text/css">
+	<title>Electron's Drag & Drop</title>
+</head>
+<body>
+<!-- 	<section class="controls">
+		<button id="new-file">New File</button>
+	</section> -->
+	<section class="content">
+		<label for="markdown" hidden>Markdown Content</label>
+		<textarea class="raw-markdown" id="markdown">Hello</textarea>
+	</section>
+</body>
+
+<script src="./renderer.js"></script>
+</html>
