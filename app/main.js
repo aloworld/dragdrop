@@ -1,11 +1,11 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 
 const fs = require('fs');
 const path = require('path');
 
 let mainWindow = null;
 
-// ipcMain.handle('create-window', async() => await createWindow());
+ipcMain.handle('open-file', (event, file) => openFile(BrowserWindow.getFocusedWindow(), file));
 
 
 const createWindow = () => {
@@ -40,3 +40,10 @@ app.whenReady().then(() => {
 app.on('window-all-closed', () => {
 	if (process.platform !== 'darwin') app.Quit();
 });
+
+const openFile = (targetWindow, file) => {
+	const contents = fs.readFileSync(file).toString();
+	console.log(contents);
+	// targetWindow.setRepresentedFilename(file);
+	targetWindow.webContents.send('opened-file', file, contents);
+}

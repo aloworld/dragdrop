@@ -20,6 +20,7 @@ markdownView.addEventListener('dragleave', () => {
 
 markdownView.addEventListener('drop', (event) => {
 	removeMarkdownDropStyle();
+	getDroppedFile(event);
 })
 
 const removeMarkdownDropStyle = () => {
@@ -29,4 +30,13 @@ const removeMarkdownDropStyle = () => {
 
 const fileTypeIsSupported = (file) => {
 	return ['text/plain', 'text/markdown'].includes(file.type);
+}
+
+window.electronAPI.onFileOpened(async(_event, file, content) => {
+	 markdownView.value = content;
+})
+
+const getDroppedFile = (event) => {
+	const file = event.dataTransfer.files[0].path;
+	window.electronAPI.openFile(file);
 }
