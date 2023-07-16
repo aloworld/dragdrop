@@ -4,15 +4,21 @@
 
 	const markdownView = document.querySelector('#markdown');
 
+	let draggedFilename = '';
 
 	// **** DOM event listeners *** 
-	document.addEventListener('dragstart', event => event.preventDefault());
+	document.addEventListener('dragstart', event => {
+		event.preventDefault();
+		event.dataTransfer.effectAllowed = "all";
+		event.dataTransfer.dropEffect = "move";
+	});
 	document.addEventListener('dragover', event => event.preventDefault());
 	document.addEventListener('dragleave', event => event.preventDefault());
 	document.addEventListener('drop', event => event.preventDefault());
 
 	markdownView.addEventListener('dragover', (event) => {
-		const file = event.dataTransfer.items[0];
+	    const file = event.dataTransfer.items[0];
+
 		if (fileTypeIsSupported(file)) {
 			markdownView.classList.add('drag-over');
 		} else {
@@ -26,21 +32,25 @@
 
 	markdownView.addEventListener('drop', (event) => {
 		removeMarkdownDropStyle();
+		const file = event.dataTransfer.files[0];
+		draggedFilename = file.name;
 		if (fileTypeIsSupported(event.dataTransfer.items[0])) {
-			const file = event.dataTransfer.files[0].path;
-			getDroppedFile(file);
+			getDroppedFile(file.path);
 		}
 	})
 
 	// **** Renderer Process Functions ****
 	const removeMarkdownDropStyle = () => {
+		draggedFilename = '';
 		markdownView.classList.remove('drag-over');
 		markdownView.classList.remove('drag-error');
 	}
 
 	const fileTypeIsSupported = (file) => {
-		console.log(`file type is supported: ${file}`);
-		return ['text/plain', 'text/markdown'].includes(file.type);
+		console.log(`file dragged: ${draggedFilename}`);
+		return file.type ?  
+			['text/plain', 'text/markdown'].includes(file.type) : 
+			/\.(md|markdown|txt)$/i.test(draggedFilename);
 	}
 
 	const getDroppedFile = (file) => {

@@ -1,3 +1,8 @@
+# Custom
+.DS_Store
+*.mp4
+*.mov
+
 # Logs
 logs
 *.log

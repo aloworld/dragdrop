@@ -61,7 +61,7 @@
 	});
 
 	app.on('window-all-closed', () => {
-		if (process.platform !== 'darwin') app.Quit();
+		if (process.platform !== 'darwin') app.quit();
 	});
 
 	// nice app listener event for launching file from the app icon's recent files menu
